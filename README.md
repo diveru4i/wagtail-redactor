@@ -19,20 +19,34 @@ This package comes with [Codemirror](https://codemirror.net/)
 
 ## Quick start
 
-1. Install:
+* Install:
     ```
        pip install -e git+https://github.com/diveru4i/wagtail-redactor.git#egg=wagtail_redactor
     ```
-2. Add "wagtail_redactor" to your INSTALLED_APPS
+* Add "redactor" and "wagtail_redactor" to your INSTALLED_APPS
     ```python
        INSTALLED_APPS = (
            ...
+           'redactor',
            'wagtail_redactor',
            ...
            
        )
     ```
-3. If you wish to use RedactorFieldBlock as part of a more complex StreamField block, you should add ```icon-redactor``` to it's Meta:
+*. Add url(r'^redactor/', include('redactor.urls')), to urls.py
+```python
+urlpatterns = [
+    # ...
+    url(r'^redactor/', include('redactor.urls')),
+    # ...
+]
+```
+* Add default config in settings.py
+```python
+REDACTOR_OPTIONS = {'lang': 'en'}
+REDACTOR_UPLOAD = 'uploads/'
+```
+* If you wish to use RedactorFieldBlock as part of a more complex StreamField block, you should add ```icon-redactor``` to it's Meta:
 ```python
 class MoreComplexBlock(blocks.StructBlock):
     title = blocks.CharBlock()
