@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from wagtail.wagtailcore import blocks
 
+from django.utils.encoding import force_text
+
 from .fields import RedactorField
 
 
