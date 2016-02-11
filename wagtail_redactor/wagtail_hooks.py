@@ -13,7 +13,7 @@ def redactor_js():
         '/static/redactor/codemirror/addon/edit/matchtags.js',
         '/static/redactor/codemirror/addon/fold/xml-fold.js',
         '/static/redactor/redactorWithCodemirror.init.js',
-        '/static/redactor/redactor.js',
+        '/static/redactor/fixed-redactor.js',
         '/static/redactor/langs/ru.js',
         '/static/redactor/redactor_init_hook.js',
     ]
@@ -27,7 +27,7 @@ def redactor_js():
 def redactor_css():
     css = [
         '/static/redactor/codemirror/lib/codemirror.css',
-        '/static/redactor/css/redactor.css',
+        '/static/redactor/css/fixed-redactor.css',
         '/static/redactor/css/django_admin.css',
         '/static/redactor/css/admin_styles.css',
     ]
