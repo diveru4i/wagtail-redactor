@@ -8,7 +8,7 @@ class PatchedRedactorEditor(RedactorEditor):
     def _media(self):
         js = (
             # 'redactor/jquery.redactor.init.js',    ## conflicts with /static/redactor/redactorWithCodemirror.init.js
-            'redactor/redactor{0}.js'.format('' if settings.DEBUG else '.min'),
+            'redactor/fixed-redactor.js',
             'redactor/langs/{0}.js'.format(GLOBAL_OPTIONS.get('lang', 'en')),
         )
 
@@ -21,7 +21,7 @@ class PatchedRedactorEditor(RedactorEditor):
 
         css = {
             'all': (
-                'redactor/css/redactor.css',
+                'redactor/css/fixed-redactor.css',
                 'redactor/css/django_admin.css',
             )
         }
