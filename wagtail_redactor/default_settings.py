@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-REDACTOR_UPLOAD = 'uploads/'
-
-FILE_UPLOAD_PERMISSIONS = 0644
-
 REDACTOR_OPTIONS = {
     'lang': 'en',
     'autoFormat': False,
