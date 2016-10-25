@@ -1,13 +1,11 @@
-from redactor.fields import RedactorField as DefaultRedactorField
-from redactor.widgets import RedactorEditor
-
-from django.forms.fields import CharField
+from django.db.models import TextField
 from django.conf import settings
+from django.contrib.admin import widgets as admin_widgets
+from django.forms.fields import CharField
+from wagtail_redactor.widgets import RedactorEditor
 
-from .widgets import PatchedRedactorEditor
 
-
-class RedactorField(CharField):
+class RedactorField(TextField):
     def __init__(self, *args, **kwargs):
         options = kwargs.pop('redactor_options', {})
         upload_to = kwargs.pop('upload_to', '')
@@ -21,22 +19,30 @@ class RedactorField(CharField):
         )
         super(RedactorField, self).__init__(*args, **kwargs)
 
+    def formfield(self, **kwargs):
+        defaults = {'widget': self.widget}
+        defaults.update(kwargs)
 
-class PatchedRedactorField(DefaultRedactorField):
+        if defaults['widget'] == admin_widgets.AdminTextareaWidget:
+            defaults['widget'] = self.widget
+        return super(RedactorField, self).formfield(**defaults)
+
+
+class RedactorFormField(CharField):
     def __init__(self, *args, **kwargs):
-        super(PatchedRedactorField, self).__init__(*args, **kwargs)
         options = kwargs.pop('redactor_options', {})
         upload_to = kwargs.pop('upload_to', '')
         allow_file_upload = kwargs.pop('allow_file_upload', True)
         allow_image_upload = kwargs.pop('allow_image_upload', True)
-        self.widget = PatchedRedactorEditor(
+        self.widget = RedactorEditor(
             redactor_options=options,
             upload_to=upload_to,
             allow_file_upload=allow_file_upload,
             allow_image_upload=allow_image_upload
         )
+        super(RedactorFormField, self).__init__(*args, **kwargs)
 
 
 if 'south' in settings.INSTALLED_APPS:
     from south.modelsinspector import add_introspection_rules
-    add_introspection_rules([], ["^redactor\.fields\.RedactorField"])
+    add_introspection_rules([], ["^_redactor\.fields\.RedactorField"])

@@ -3,12 +3,12 @@ from wagtail.wagtailcore import blocks
 
 from django.utils.encoding import force_text
 
-from .fields import RedactorField
+from .fields import RedactorFormField
 
 
 class RedactorFieldBlock(blocks.FieldBlock):
     def __init__(self, required=True, help_text=None, **kwargs):
-        self.field = RedactorField(required=required, help_text=help_text)
+        self.field = RedactorFormField(required=required, help_text=help_text)
         super(RedactorFieldBlock, self).__init__(required=required, help_text=help_text, **kwargs)
 
     class Meta:

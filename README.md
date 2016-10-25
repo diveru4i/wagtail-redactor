@@ -1,14 +1,11 @@
 Wagtail Redactor
 ========================
 
-Wagtail's default WYSIWYG editor sucks balls (*by design*). Here's an attempt to integrate a better option into WagtailCMS - [Imperavi Redactor](http://imperavi.com/redactor/)
-
-![proof](https://raw.githubusercontent.com/diveru4i/wagtail-redactor/master/screen.png)
+Fork of [django-wysiwyg-redactor](https://github.com/douglasmiranda/django-wysiwyg-redactor), that works with WagtailCMS.
 
 ## Requirements
 
-- wagtail>=1.0
-- django-wysiwyg-redactor==0.4.9
+- wagtail>=1.5
 
 This package comes with [Codemirror](https://codemirror.net/)
 
@@ -23,21 +20,22 @@ This package comes with [Codemirror](https://codemirror.net/)
     ```
        pip install -e git+https://github.com/diveru4i/wagtail-redactor.git#egg=wagtail_redactor
     ```
-* Add "redactor" and "wagtail_redactor" to your INSTALLED_APPS
+* Add "wagtail_redactor" to your INSTALLED_APPS
     ```python
        INSTALLED_APPS = (
            ...
-           'redactor',
            'wagtail_redactor',
            ...
-           
+
        )
     ```
-*. Add url(r'^redactor/', include('redactor.urls')), to urls.py
+*. Add url(r'^redactor/', include(wagtail_redactor.urls)), to urls.py
 ```python
+import wagtail_redactor.urls
+
 urlpatterns = [
     # ...
-    url(r'^redactor/', include('redactor.urls')),
+    url(r'^redactor/', include(wagtail_redactor.urls)),
     # ...
 ]
 ```
@@ -45,6 +43,7 @@ urlpatterns = [
 ```python
 REDACTOR_OPTIONS = {'lang': 'en'}
 REDACTOR_UPLOAD = 'uploads/'
+FILE_UPLOAD_PERMISSIONS = 0644
 ```
 * If you wish to use RedactorFieldBlock as part of a more complex StreamField block, you should add ```icon-redactor``` to it's Meta:
 ```python
