@@ -3,7 +3,7 @@
     $(function () {
         var $document = $(document);
 
-        $document.on('click', 'button[class*="icon-redactor"], button[class*="icon-plus"]', function () {
+        $document.on('click', 'button[class*="icon-redactor"], button[class*="icon-plus"], a[class*="toggle"]', function () {
             var $redactors = $('textarea.redactor-box');
             if ($redactors.length) {
                 $redactors.each(function () {

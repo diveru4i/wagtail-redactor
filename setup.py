@@ -9,7 +9,7 @@ f.close()
 
 setup(
     name='wagtail-redactor',
-    version='0.5.1',
+    version='0.5.2',
     description='Imperavi Redactor for WagtailCMS',
     long_description=readme,
     author='Melfi Silver',
