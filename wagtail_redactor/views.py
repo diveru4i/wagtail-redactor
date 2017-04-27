@@ -25,7 +25,7 @@ class RedactorUploadView(FormView):
     http_method_names = ('post',)
     upload_to = getattr(settings, 'REDACTOR_UPLOAD', 'redactor/')
     upload_handler = getattr(settings, 'REDACTOR_UPLOAD_HANDLER',
-                             'redactor.handlers.SimpleUploader')
+                             'wagtail_redactor.handlers.SimpleUploader')
     auth_decorator = getattr(settings, 'REDACTOR_AUTH_DECORATOR',
                              staff_member_required)
     if isinstance(auth_decorator, basestring):
